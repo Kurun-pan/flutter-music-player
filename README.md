@@ -2,15 +2,20 @@
 
 Flutter music player example application.
 
-## Getting Started
+<img src="./README_assets/app_screenshot_0.png" width="240">
 
-This project is a starting point for a Flutter application.
+## TODO
 
-A few resources to get you started if this is your first Flutter project:
+- Support Android
+- Support iOS
+- Support macOS
+- Support Linux
+- Support Windows
+- Support Web
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Assets Licence
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The image files in this application are following.
+
+- https://all-free-download.com/free-vector/download/digital-music-background_311664.html
+- https://www.skyseeker.net/
