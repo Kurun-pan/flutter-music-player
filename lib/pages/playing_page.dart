@@ -117,7 +117,7 @@ class _PlayingState extends State<PlayingPage> {
 
   Future next(Musics m) async {
     stop();
-    setState(() => play(m.nextTrack));
+    play(m.nextTrack);
   }
 
   Future prev(Musics m) async {
@@ -129,6 +129,14 @@ class _PlayingState extends State<PlayingPage> {
     final result = await audioPlayer.mute(muted);
     if (result)
       setState(() => isMuted = muted);
+  }
+
+  void changeTrack(int index) {
+    //print("index = $index");
+    if (index > widget.musics.currentIndex)
+      next(widget.musics);
+    else
+      prev(widget.musics);
   }
 
   @override
@@ -153,7 +161,7 @@ class _PlayingState extends State<PlayingPage> {
           ),
           new Row(mainAxisSize: MainAxisSize.min, children: [
             new CustomIconButton(Icons.skip_previous, () => prev(widget.musics)),
-            new CustomIconButton(isPlaying ? Icons.pause_circle_outline : Icons.play_circle_outline,
+            new CustomIconButton(isPlaying ? Icons.pause : Icons.play_arrow,
                 isPlaying ? () => pause() : () => play(widget._music)),
             new CustomIconButton(Icons.skip_next, () => next(widget.musics)),
           ]),
@@ -203,7 +211,7 @@ class _PlayingState extends State<PlayingPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          new AlbumUI(music, duration, position),
+          new AlbumUI(widget.musics, music, duration, position, changeTrack),
           new Material(
             child: _buildPlayer(),
             color: Colors.transparent,

@@ -1,13 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_music_player_app/data/musics.dart';
 import 'package:flutter_music_player_app/data/music.dart';
 
 class AlbumUI extends StatefulWidget {
+  final Musics musics;
   final Music music;
   final Duration position;
   final Duration duration;
+  final void Function(int) changeTrackHandler;
 
-  AlbumUI(this.music, this.duration, this.position);
+  AlbumUI(this.musics, this.music, this.duration, this.position, this.changeTrackHandler);
 
   @override
   AlbumUIState createState() => new AlbumUIState();
@@ -43,6 +47,7 @@ class AlbumUIState extends State<AlbumUI> with SingleTickerProviderStateMixin {
 
     final double height = 250.0;
 
+    /*
     var myHero = new Hero(
       tag: widget.music.title,
       child: new Material(
@@ -61,6 +66,40 @@ class AlbumUIState extends State<AlbumUI> with SingleTickerProviderStateMixin {
                   height: height,
                   gaplessPlayback: false,
                 )),
+    );
+    */
+
+    var myHero = new Hero(
+      tag: widget.music.title,
+      child: new Material(
+          borderRadius: new BorderRadius.circular(5.0),
+          elevation: 5.0,
+          child: new Swiper(
+            itemBuilder: (BuildContext context, int index) {
+              if (f != null)
+                return new Image.file(
+                  f,
+                  fit: BoxFit.cover,
+                  height: height,
+                  gaplessPlayback: true,
+                );
+              else
+                return new Image.asset(
+                  "assets/music_cover.jpg",
+                  fit: BoxFit.fill,
+                  height: height,
+                  gaplessPlayback: false,
+                );
+            },
+            onIndexChanged: (int index) {
+              if (widget.changeTrackHandler != null)
+                widget.changeTrackHandler(index);
+            },
+            itemCount: widget.musics.length,
+            viewportFraction: 1.0,
+            scale: 1.0,
+          )
+      ),
     );
 
     return new SizedBox.fromSize(
