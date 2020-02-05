@@ -4,9 +4,10 @@ Flutter music player example application.
 
 <img src="./README_assets/app_screenshot_0.png" width="240">
 
-## TODO
+## Support Platform
+- Android
 
-- Support Android
+### TODO
 - Support iOS
 - Support macOS
 - Support Linux

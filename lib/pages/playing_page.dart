@@ -74,7 +74,6 @@ class _PlayingState extends State<PlayingPage> {
     audioPlayer.setPositionHandler((p) => setState(() {
           position = p;
         }));
-
     audioPlayer.setCompletionHandler(() {
       onComplete();
       setState(() => position = duration);
@@ -92,6 +91,7 @@ class _PlayingState extends State<PlayingPage> {
   Future play(Music m) async {
     if (m != null) {
       final result = await audioPlayer.play(m.uri, isLocal: true);
+      //print("uri = ${m.uri}");
       if (result == 1)
         setState(() {
           playerState = PlayerState.playing;
@@ -127,12 +127,11 @@ class _PlayingState extends State<PlayingPage> {
 
   Future mute(bool muted) async {
     final result = await audioPlayer.mute(muted);
-    if (result)
+    if (result == 1)
       setState(() => isMuted = muted);
   }
 
   void changeTrack(int index) {
-    //print("index = $index");
     if (index > widget.musics.currentIndex)
       next(widget.musics);
     else

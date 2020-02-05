@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music_player_app/pages/main_page.dart';
 import 'package:flutter_music_player_app/data/musics.dart';
+import 'package:flutter_music_player_app/services/audio_player.dart';
 import 'package:flutter_music_player_app/widgets/music_inherited.dart';
-import 'package:flutter_music_player_app/services/music_finder.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
 
     var musicFiles;
     try {
-      musicFiles = await MusicFinder.getMusics();
+      musicFiles = await AudioPlayer.getMusics();
     } catch (e) {
       print("MusicFInder Failed: '${e.message}'.");
     }
