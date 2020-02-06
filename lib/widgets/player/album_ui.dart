@@ -45,30 +45,7 @@ class AlbumUIState extends State<AlbumUI> with SingleTickerProviderStateMixin {
         ? null
         : new File.fromUri(Uri.parse(widget.music.albumArt));
 
-    final double height = 250.0;
-
-    /*
-    var myHero = new Hero(
-      tag: widget.music.title,
-      child: new Material(
-          borderRadius: new BorderRadius.circular(5.0),
-          elevation: 5.0,
-          child: f != null
-              ? new Image.file(
-                  f,
-                  fit: BoxFit.cover,
-                  height: height,
-                  gaplessPlayback: true,
-                )
-              : new Image.asset(
-                  "assets/music_cover.jpg",
-                  fit: BoxFit.fill,
-                  height: height,
-                  gaplessPlayback: false,
-                )),
-    );
-    */
-
+    final double height = 280.0;
     var myHero = new Hero(
       tag: widget.music.title,
       child: new Material(
