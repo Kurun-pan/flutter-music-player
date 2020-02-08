@@ -5,6 +5,13 @@ import 'package:flutter_music_player_app/widgets/player/custom_icon_button.dart'
 Widget nowPlayingArea(Music music, VoidCallback callback) {
   return Container(
       margin: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            spreadRadius: 10.0, // has the effect of extending the shadow
+          )
+        ],
+      ),
       child: Row(    // 1行目
         children: <Widget>[
           Expanded(  // 2.1列目

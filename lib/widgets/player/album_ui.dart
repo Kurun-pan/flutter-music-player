@@ -84,6 +84,7 @@ class AlbumUIState extends State<AlbumUI> with SingleTickerProviderStateMixin {
       child: new Stack(
         children: <Widget>[
           myHero,
+          /*
           new Container(
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.symmetric(horizontal: 0.8),
@@ -107,6 +108,7 @@ class AlbumUIState extends State<AlbumUI> with SingleTickerProviderStateMixin {
               ]),
             ),
           ),
+          */
         ],
       ),
     );
