@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -19,20 +20,45 @@ class AudioPlayer {
     _channel.setMethodCallHandler(platformCallHandler);
   }
 
-  Future<dynamic> play(String url, {bool isLocal: false}) =>
-      _channel.invokeMethod('play', {"url": url, "isLocal": isLocal});
+  Future<dynamic> play(String url, {bool isLocal: false}) {
+      // todo: support other plaftorms
+      if (Platform.isAndroid)
+        return _channel.invokeMethod('play', {"url": url, "isLocal": isLocal});
+      else
+        return null;
+  }
 
-  Future<dynamic> pause() =>
-      _channel.invokeMethod('pause');
+  Future<dynamic> pause() {
+      // todo: support other plaftorms
+      if (Platform.isAndroid)
+        return _channel.invokeMethod('pause');
+      else
+        return null;
+  }
 
-  Future<dynamic> stop() =>
-      _channel.invokeMethod('stop');
+  Future<dynamic> stop() {
+      // todo: support other plaftorms
+      if (Platform.isAndroid)
+        return _channel.invokeMethod('stop');
+      else
+        return null;
+  }
 
-  Future<dynamic> mute(bool muted) =>
-      _channel.invokeMethod('mute', muted);
+  Future<dynamic> mute(bool muted) {
+      // todo: support other plaftorms
+      if (Platform.isAndroid)
+        return _channel.invokeMethod('mute', muted);
+      else
+        return null;
+  }
 
-  Future<dynamic> seek(double seconds) =>
-      _channel.invokeMethod('seek', seconds);
+  Future<dynamic> seek(double seconds) {
+      // todo: support other plaftorms
+      if (Platform.isAndroid)
+        return _channel.invokeMethod('seek', seconds);
+      else
+        return null;
+  }
 
   void setDurationHandler(TimeChangeHandler handler) {
     durationHandler = handler;
@@ -55,21 +81,24 @@ class AudioPlayer {
   }
 
   static Future<dynamic> getMusics() async {
-    var completer = new Completer();
-    List<dynamic> musics = await _channel.invokeMethod('getMusics', null);
-    print(musics.runtimeType);
+    if (Platform.isAndroid) {
+      var completer = new Completer();
+      List<dynamic> musics = await _channel.invokeMethod('getMusics', null);
+      print(musics.runtimeType);
 
-    completer.complete(musics.map((m) => new Music.fromMap(m)).toList());
-    return completer.future;
-
-    // example music list
-    /*
-    List<Music> musics = [
-      new Music(0, "artist", "a music", "sample album", 0, 100, "uri", null, 0),
-      new Music(1, "artist", "b music", "sample album", 0, 100, "uri", null, 1),
-    ];
-    return musics;
-     */
+      completer.complete(musics.map((m) => new Music.fromMap(m)).toList());
+      return completer.future;
+    } else {
+      // todo: support other plaftorms
+      // example music list
+      List<Music> musics = [
+        new Music(0, "aaa", "a music", "sample album", 0, 100, "uri", null, 0),
+        new Music(1, "bbb", "b music", "sample album", 0, 100, "uri", null, 1),
+        new Music(2, "ccc", "c music", "sample album", 0, 100, "uri", null, 2),
+        new Music(3, "ddd", "d music", "sample album", 0, 100, "uri", null, 3),
+      ];
+      return musics;
+    }
   }
 
   Future platformCallHandler(MethodCall call) async {

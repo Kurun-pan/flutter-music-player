@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -92,7 +93,7 @@ class _PlayingState extends State<PlayingPage> {
     if (m != null) {
       final result = await audioPlayer.play(m.uri, isLocal: true);
       //print("uri = ${m.uri}");
-      if (result == 1)
+      if (result == 1 || !Platform.isAndroid) // todo: Support for non-Android platforms
         setState(() {
           playerState = PlayerState.playing;
           music = m;
@@ -102,13 +103,13 @@ class _PlayingState extends State<PlayingPage> {
 
   Future pause() async {
     final result = await audioPlayer.pause();
-    if (result == 1)
+    if (result == 1 || !Platform.isAndroid) // todo: Support for non-Android platforms
       setState(() => playerState = PlayerState.paused);
   }
 
   Future stop() async {
     final result = await audioPlayer.stop();
-    if (result == 1)
+    if (result == 1 || !Platform.isAndroid) // todo: Support for non-Android platforms
       setState(() {
         playerState = PlayerState.stopped;
         position = new Duration();
@@ -127,7 +128,7 @@ class _PlayingState extends State<PlayingPage> {
 
   Future mute(bool muted) async {
     final result = await audioPlayer.mute(muted);
-    if (result == 1)
+    if (result == 1 || !Platform.isAndroid) // todo: Support for non-Android platforms
       setState(() => isMuted = muted);
   }
 
